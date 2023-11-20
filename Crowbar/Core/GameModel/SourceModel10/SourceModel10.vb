@@ -422,13 +422,22 @@ Public Class SourceModel10
 	'	Return status
 	'End Function
 
-	Public Overrides Function WriteAccessedBytesDebugFiles(ByVal debugPath As String) As AppEnums.StatusMessage
+	Public Overrides Function WriteAccessedBytesDebugFiles(
+														  ByVal debugPath As String,
+														  Optional ByVal debugAniFileNameSuffix As String = "decompile-ANI.txt",
+														  Optional ByVal debugMdlFileNameSuffix As String = "decompile-MDL.txt",
+														  Optional ByVal debugPhyFileNameSuffix As String = "decompile-PHY.txt",
+														  Optional ByVal debugSequenceGroupMDLFileNameSuffix As String = "decompile-SequenceGroupMDL.txt",
+														  Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
+														  Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
+														  Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
+														  ) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
 		Dim debugPathFileName As String
 
 		If Me.theMdlFileData IsNot Nothing Then
-			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + My.Resources.Decompile_DebugMdlFileNameSuffix)
+			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + debugMdlFileNameSuffix)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileStarted, debugPathFileName)
 			Me.WriteAccessedBytesDebugFile(debugPathFileName, Me.theMdlFileData.theFileSeekLog)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileFinished, debugPathFileName)
@@ -439,7 +448,7 @@ Public Class SourceModel10
 			Dim fileNameWithoutExtension As String
 			Dim fileExtension As String
 			For i As Integer = 0 To Me.theSequenceGroupMdlFileDatas10.Count - 1
-				fileName = Me.theName + " " + My.Resources.Decompile_DebugSequenceGroupMDLFileNameSuffix
+				fileName = Me.theName + " " + debugSequenceGroupMDLFileNameSuffix
 				fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName)
 				fileExtension = Path.GetExtension(fileName)
 				debugPathFileName = Path.Combine(debugPath, fileNameWithoutExtension + (i + 1).ToString("00") + fileExtension)
@@ -450,7 +459,7 @@ Public Class SourceModel10
 		End If
 
 		If Me.theTextureMdlFileData10 IsNot Nothing Then
-			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + My.Resources.Decompile_DebugTextureMDLFileNameSuffix)
+			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + debugTextureMDLFileNameSuffix)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileStarted, debugPathFileName)
 			Me.WriteAccessedBytesDebugFile(debugPathFileName, Me.theTextureMdlFileData10.theFileSeekLog)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileFinished, debugPathFileName)

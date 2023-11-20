@@ -1,10 +1,10 @@
 Module MathModule
 
-    Public Function UnixTimeStampToDateTime(ByVal unixTimeStamp As Long) As DateTime
+	Public Function UnixTimeStampToDateTime(ByVal unixTimeStamp As Long) As DateTime
 		Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)
 		dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime()
 		Return dtDateTime
-    End Function
+	End Function
 
 	Public Function DateTimeToUnixTimeStamp(ByVal iDateTime As DateTime) As Long
 		Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)

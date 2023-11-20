@@ -175,13 +175,22 @@ Public Class SourceModel04
 		Return status
 	End Function
 
-	Public Overrides Function WriteAccessedBytesDebugFiles(ByVal debugPath As String) As AppEnums.StatusMessage
+	Public Overrides Function WriteAccessedBytesDebugFiles(
+			ByVal debugPath As String,
+			Optional ByVal debugAniFileNameSuffix As String = "decompile-ANI.txt",
+			Optional ByVal debugMdlFileNameSuffix As String = "decompile-MDL.txt",
+			Optional ByVal debugPhyFileNameSuffix As String = "decompile-PHY.txt",
+			Optional ByVal debugSequenceGroupMDLFileNameSuffix As String = "decompile-SequenceGroupMDL.txt",
+			Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
+			Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
+			Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
+			) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
 		Dim debugPathFileName As String
 
 		If Me.theMdlFileData IsNot Nothing Then
-			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + My.Resources.Decompile_DebugMdlFileNameSuffix)
+			debugPathFileName = Path.Combine(debugPath, Me.theName + " " + debugMdlFileNameSuffix)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileStarted, debugPathFileName)
 			Me.WriteAccessedBytesDebugFile(debugPathFileName, Me.theMdlFileData.theFileSeekLog)
 			Me.NotifySourceModelProgress(ProgressOptions.WritingFileFinished, debugPathFileName)

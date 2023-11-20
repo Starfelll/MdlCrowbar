@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>MdlCrowbar</RootNamespace>
+    <TargetFramework>net7.0</TargetFramework>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\GameModel\SourceModel44\**" />
+    <Compile Remove="Core\GameModel\SourceModel48\**" />
+    <EmbeddedResource Remove="Core\GameModel\SourceModel44\**" />
+    <EmbeddedResource Remove="Core\GameModel\SourceModel48\**" />
+    <None Remove="Core\GameModel\SourceModel44\**" />
+    <None Remove="Core\GameModel\SourceModel48\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\- General\BackgroundWorkerEx.vb" />
+    <Compile Remove="Core\- General\BindingListEx.vb" />
+    <Compile Remove="Core\- General\BindingListExAutoSort.vb" />
+    <Compile Remove="Core\- General\DuplicateKeyComparer.vb" />
+    <Compile Remove="Core\- General\WindowsJob.vb" />
+    <Compile Remove="Core\- General\Workarounds.vb" />
+    <Compile Remove="Core\DebugLog\DebugFormatModule.vb" />
+    <Compile Remove="Core\GameModel\CompiledFiles\AniFile\AniFile44\SourceAniFile44.vb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\crowbar_icon_large.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\GameModel\CompiledFiles\AniFile\AniFile44\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\crowbar_icon_large.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="crowbar_icon_large.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <AssemblyName>MdlCrowbar</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>MdlCrowbar</Title>
+    <VersionPrefix>0.74</VersionPrefix>
+    <PackageProjectUrl>https://github.com/Starfelll/MdlCrowbar</PackageProjectUrl>
+    <PackageIcon>crowbar_icon_large.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>Starfelll</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description> .NET library for loading Source1/GoldSrc model (.mdl, .vtx, .vvd, .phy).   </Description>
+  </PropertyGroup>
+</Project>
