@@ -345,7 +345,7 @@ Public Class FileManager
 				Directory.CreateDirectory(path)
 			End If
 		Catch ex As Exception
-			Throw ex
+			Throw
 		End Try
 	End Sub
 
@@ -479,23 +479,23 @@ Public Class FileManager
 		Return cleanPathFileName
 	End Function
 
-	Public Shared Sub ParsePath(ByVal sender As Object, ByVal e As ConvertEventArgs)
-		If e.DesiredType IsNot GetType(String) Then
-			Exit Sub
-		End If
-		If CStr(e.Value) <> "" Then
-			e.Value = FileManager.GetCleanPath(CStr(e.Value), True)
-		End If
-	End Sub
+	' Public Shared Sub ParsePath(ByVal sender As Object, ByVal e As ConvertEventArgs)
+	' 	If e.DesiredType IsNot GetType(String) Then
+	' 		Exit Sub
+	' 	End If
+	' 	If CStr(e.Value) <> "" Then
+	' 		e.Value = FileManager.GetCleanPath(CStr(e.Value), True)
+	' 	End If
+	' End Sub
 
-	Public Shared Sub ParsePathFileName(ByVal sender As Object, ByVal e As ConvertEventArgs)
-		If e.DesiredType IsNot GetType(String) Then
-			Exit Sub
-		End If
-		If CStr(e.Value) <> "" Then
-			e.Value = FileManager.GetCleanPathFileName(CStr(e.Value), True)
-		End If
-	End Sub
+	' Public Shared Sub ParsePathFileName(ByVal sender As Object, ByVal e As ConvertEventArgs)
+	' 	If e.DesiredType IsNot GetType(String) Then
+	' 		Exit Sub
+	' 	End If
+	' 	If CStr(e.Value) <> "" Then
+	' 		e.Value = FileManager.GetCleanPathFileName(CStr(e.Value), True)
+	' 	End If
+	' End Sub
 
 	Public Shared Function GetNormalizedPathFileName(ByVal givenPathFileName As String) As String
 		Dim cleanPathFileName As String

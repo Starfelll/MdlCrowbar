@@ -574,7 +574,16 @@ Public MustInherit Class SourceModel
 		Me.WriteFile(mdlPathFileName, AddressOf Me.WriteAniFileNameToMdlFile, internalAniFileName, Me.theMdlFileDataGeneric)
 	End Sub
 
-	Public Overridable Function WriteAccessedBytesDebugFiles(ByVal debugPath As String) As AppEnums.StatusMessage
+	Public Overridable Function WriteAccessedBytesDebugFiles(
+			ByVal debugPath As String,
+			Optional ByVal debugAniFileNameSuffix As String = "decompile-ANI.txt",
+			Optional ByVal debugMdlFileNameSuffix As String = "decompile-MDL.txt",
+			Optional ByVal debugPhyFileNameSuffix As String = "decompile-PHY.txt",
+			Optional ByVal debugSequenceGroupMDLFileNameSuffix As String = "decompile-SequenceGroupMDL.txt",
+			Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
+			Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
+			Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
+			) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
