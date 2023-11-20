@@ -1,6 +1,6 @@
 Imports System.ComponentModel
 
-Public Module AppEnums
+Public Module Enums
 
 	Public Enum InputOptions
 		<Description("File")> File

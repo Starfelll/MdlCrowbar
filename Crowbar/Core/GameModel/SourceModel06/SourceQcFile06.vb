@@ -85,7 +85,7 @@ Public Class SourceQcFile06
 			For bodyPartIndex As Integer = 0 To Me.theMdlFileData.theBodyParts.Count - 1
 				aBodyPart = Me.theMdlFileData.theBodyParts(bodyPartIndex)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$BodyGroup "
 				Else
 					line = "$bodygroup "
@@ -135,20 +135,20 @@ Public Class SourceQcFile06
 				For boneControllerIndex As Integer = 0 To Me.theMdlFileData.theBoneControllers.Count - 1
 					boneController = Me.theMdlFileData.theBoneControllers(boneControllerIndex)
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$Controller "
 					Else
 						line = "$controller "
 					End If
-					line += boneControllerIndex.ToString(TheApp.InternalNumberFormat)
+					line += boneControllerIndex.ToString(Settings.InternalNumberFormat)
 					line += " """
 					line += Me.theMdlFileData.theBones(boneController.boneIndex).theName
 					line += """ "
 					line += SourceModule06.GetControlText(boneController.type)
 					line += " "
-					line += boneController.startAngleDegrees.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.startAngleDegrees.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += boneController.endAngleDegrees.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.endAngleDegrees.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -165,7 +165,7 @@ Public Class SourceQcFile06
 
 		Me.theOutputFileStreamWriter.WriteLine()
 
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line = "$ModelName "
 		Else
 			line = "$modelname "
@@ -186,7 +186,7 @@ Public Class SourceQcFile06
 			For sequenceGroupIndex As Integer = 0 To Me.theMdlFileData.theSequences.Count - 1
 				aSequence = Me.theMdlFileData.theSequences(sequenceGroupIndex)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$Sequence "
 				Else
 					line = "$sequence "
@@ -332,9 +332,9 @@ Public Class SourceQcFile06
 				line += "{ "
 				line += "event "
 				'line += aSequenceDesc.theEvents(j).eventIndex.ToString(TheApp.InternalNumberFormat)
-				line += aSequenceDesc.theEvents(j).eventType.ToString(TheApp.InternalNumberFormat)
+				line += aSequenceDesc.theEvents(j).eventType.ToString(Settings.InternalNumberFormat)
 				line += " "
-				line += frameIndex.ToString(TheApp.InternalNumberFormat)
+				line += frameIndex.ToString(Settings.InternalNumberFormat)
 				'If aSequenceDesc.theEvents(j).theOptions <> "" Then
 				'	line += " """
 				'	line += aSequenceDesc.theEvents(j).theOptions
@@ -347,7 +347,7 @@ Public Class SourceQcFile06
 
 		line = vbTab
 		line += "fps "
-		line += aSequenceDesc.fps.ToString("0.######", TheApp.InternalNumberFormat)
+		line += aSequenceDesc.fps.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		If (aSequenceDesc.flags And SourceMdlSequenceDesc06.STUDIO_LOOPING) > 0 Then

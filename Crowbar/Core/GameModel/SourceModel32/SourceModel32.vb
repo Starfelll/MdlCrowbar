@@ -131,7 +131,7 @@ Public Class SourceModel32
 #Region "Methods"
 
 	Public Overrides Function CheckForRequiredFiles() As FilesFoundFlags
-		Dim status As AppEnums.FilesFoundFlags = FilesFoundFlags.AllFilesFound
+		Dim status As Enums.FilesFoundFlags = FilesFoundFlags.AllFilesFound
 
 		If Not Me.theMdlFileDataGeneric.theMdlFileOnlyHasAnimations Then
 			Me.thePhyPathFileName = Path.ChangeExtension(Me.theMdlPathFileName, ".phy")
@@ -157,8 +157,8 @@ Public Class SourceModel32
 		Return status
 	End Function
 
-	Public Overrides Function ReadPhyFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function ReadPhyFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'If String.IsNullOrEmpty(Me.thePhyPathFileName) Then
 		'	status = Me.CheckForRequiredFiles()
@@ -181,24 +181,24 @@ Public Class SourceModel32
 		Return status
 	End Function
 
-	Public Overrides Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = Me.WriteMeshSmdFiles(modelOutputPath, 0, 0)
 
 		Return status
 	End Function
 
-	Public Overrides Function WriteLodMeshFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function WriteLodMeshFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = Me.WriteMeshSmdFiles(modelOutputPath, 1, Me.theVtxFileData.lodCount - 1)
 
 		Return status
 	End Function
 
-	Public Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal lodIndex As Integer, ByVal aVtxModel As SourceVtxModel06, ByVal aModel As SourceMdlModel37, ByVal bodyPartVertexIndexStart As Integer) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal lodIndex As Integer, ByVal aVtxModel As SourceVtxModel06, ByVal aModel As SourceMdlModel37, ByVal bodyPartVertexIndexStart As Integer) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Try
 			Me.theOutputFileTextWriter = File.CreateText(smdPathFileName)
@@ -222,8 +222,8 @@ Public Class SourceModel32
 		Return status
 	End Function
 
-	Public Overrides Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim anAnimationDesc As SourceMdlAnimationDesc32
 		Dim smdPath As String
@@ -274,8 +274,8 @@ Public Class SourceModel32
 			Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
 			Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
 			Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
-			) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+			) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim debugPathFileName As String
 
@@ -454,7 +454,7 @@ Public Class SourceModel32
 			qcFile.WriteObsoleteCommand()
 			qcFile.WriteCdMaterialsCommand()
 			qcFile.WriteTextureGroupCommand()
-			If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+			If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 				qcFile.WriteTextureFileNameComments()
 			End If
 
@@ -478,8 +478,8 @@ Public Class SourceModel32
 		End Try
 	End Sub
 
-	Protected Overrides Function WriteMeshSmdFiles(ByVal modelOutputPath As String, ByVal lodStartIndex As Integer, ByVal lodStopIndex As Integer) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Protected Overrides Function WriteMeshSmdFiles(ByVal modelOutputPath As String, ByVal lodStartIndex As Integer, ByVal lodStopIndex As Integer) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'Dim smdFileName As String
 		Dim smdPathFileName As String

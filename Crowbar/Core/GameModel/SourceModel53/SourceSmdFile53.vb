@@ -55,11 +55,11 @@ Public Class SourceSmdFile53
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -74,7 +74,7 @@ Public Class SourceSmdFile53
 		line = "skeleton"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0"
 		Else
 			line = "  time 0"
@@ -82,19 +82,19 @@ Public Class SourceSmdFile53
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 			line = "    "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -140,7 +140,7 @@ Public Class SourceSmdFile53
 					meshVertexIndexStart = aModel.theMeshes(meshIndex).vertexIndexStart
 
 					If aVtxMesh.theVtxStripGroups IsNot Nothing Then
-						If TheApp.Settings.DecompileDebugInfoFilesIsChecked AndAlso materialPathFileName <> materialFileName Then
+						If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked AndAlso materialPathFileName <> materialFileName Then
 							materialLine = "// In the MDL file as: " + materialPathFileName
 							Me.theOutputFileStreamWriter.WriteLine(materialLine)
 						End If
@@ -270,22 +270,22 @@ Public Class SourceSmdFile53
 								'aVectorTransformed.y += faceSectionIndex * 20
 
 								line = "    "
-								line += boneIndex.ToString(TheApp.InternalNumberFormat)
+								line += boneIndex.ToString(Settings.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.x.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.x.ToString("0.000000", Settings.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.y.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.y.ToString("0.000000", Settings.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.z.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 								'line += " 0 0 0"
 								'------
 								line += " "
-								line += phyVertex.Normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 								line += " "
-								line += phyVertex.Normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 								line += " "
-								line += phyVertex.Normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 								line += " 0 0"
 								'NOTE: The studiomdl.exe doesn't need the integer values at end.
@@ -386,7 +386,7 @@ Public Class SourceSmdFile53
 
 				Me.CalcAnimation(aSequenceDesc, anAnimationDesc, frameIndex)
 
-				If TheApp.Settings.DecompileStricterFormatIsChecked Then
+				If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 					line = "time "
 				Else
 					line = "  time "
@@ -411,23 +411,23 @@ Public Class SourceSmdFile53
 					'Me.AdjustPositionAndRotation(boneIndex, adjustedPosition, adjustedRotation, position, rotation)
 
 					line = "    "
-					line += boneIndex.ToString(TheApp.InternalNumberFormat)
+					line += boneIndex.ToString(Settings.InternalNumberFormat)
 
 					line += " "
-					line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 					line += " "
-					line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 					line += " "
-					line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 					line += " "
-					line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 					line += " "
-					line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 					line += " "
-					line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+					line += rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 
-					If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+					If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 						line += "   # "
 						line += "pos: "
 						line += aFrameLine.position.debug_text
@@ -661,49 +661,49 @@ Public Class SourceSmdFile53
 			End If
 
 			line = "  "
-			line += aVertex.boneWeight.bone(0).ToString(TheApp.InternalNumberFormat)
+			line += aVertex.boneWeight.bone(0).ToString(Settings.InternalNumberFormat)
 
 			line += " "
 			If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0 Then
 				'NOTE: This does not work for L4D2 w_models\weapons\w_minigun.mdl.
-				line += aVertex.positionY.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.positionY.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += (-aVertex.positionX).ToString("0.000000", TheApp.InternalNumberFormat)
+				line += (-aVertex.positionX).ToString("0.000000", Settings.InternalNumberFormat)
 			Else
 				'NOTE: This works for L4D2 w_models\weapons\w_minigun.mdl.
-				line += aVertex.positionX.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.positionX.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.positionY.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.positionY.ToString("0.000000", Settings.InternalNumberFormat)
 			End If
 			line += " "
-			line += aVertex.positionZ.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += aVertex.positionZ.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
 			If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0 Then
-				line += aVertex.normalY.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normalY.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += (-aVertex.normalX).ToString("0.000000", TheApp.InternalNumberFormat)
+				line += (-aVertex.normalX).ToString("0.000000", Settings.InternalNumberFormat)
 			Else
-				line += aVertex.normalX.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normalX.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.normalY.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normalY.ToString("0.000000", Settings.InternalNumberFormat)
 			End If
 			line += " "
-			line += aVertex.normalZ.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += aVertex.normalZ.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += aVertex.texCoordX.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += aVertex.texCoordX.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
 			'line += aVertex.texCoordY.ToString("0.000000", TheApp.InternalNumberFormat)
-			line += (1 - aVertex.texCoordY).ToString("0.000000", TheApp.InternalNumberFormat)
+			line += (1 - aVertex.texCoordY).ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += aVertex.boneWeight.boneCount.ToString(TheApp.InternalNumberFormat)
+			line += aVertex.boneWeight.boneCount.ToString(Settings.InternalNumberFormat)
 			For boneWeightBoneIndex As Integer = 0 To aVertex.boneWeight.boneCount - 1
 				line += " "
-				line += aVertex.boneWeight.bone(boneWeightBoneIndex).ToString(TheApp.InternalNumberFormat)
+				line += aVertex.boneWeight.bone(boneWeightBoneIndex).ToString(Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.boneWeight.weight(boneWeightBoneIndex).ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.boneWeight.weight(boneWeightBoneIndex).ToString("0.000000", Settings.InternalNumberFormat)
 			Next
 			'Me.theOutputFileStreamWriter.WriteLine(line)
 		Catch ex As Exception

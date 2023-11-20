@@ -71,7 +71,7 @@ Public Class SourceModel14
 #Region "Methods"
 
 	Public Overrides Function CheckForRequiredFiles() As FilesFoundFlags
-		Dim status As AppEnums.FilesFoundFlags = FilesFoundFlags.AllFilesFound
+		Dim status As Enums.FilesFoundFlags = FilesFoundFlags.AllFilesFound
 
 		'Dim mdlPath As String
 		'Dim mdlFileNameWithoutExtension As String
@@ -122,8 +122,8 @@ Public Class SourceModel14
 		Return status
 	End Function
 
-	Public Overrides Function ReadSequenceGroupMdlFiles() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function ReadSequenceGroupMdlFiles() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim aSequenceGroup As SourceMdlSequenceGroup10
 		Dim mdlPath As String
@@ -142,8 +142,8 @@ Public Class SourceModel14
 		Return status
 	End Function
 
-	Public Overrides Function ReadTextureMdlFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function ReadTextureMdlFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'If String.IsNullOrEmpty(Me.theTextureMdlPathFileName) Then
 		'	status = Me.CheckForRequiredFiles()
@@ -160,8 +160,8 @@ Public Class SourceModel14
 		Return status
 	End Function
 
-	Public Overrides Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'Dim smdFileName As String
 		'Dim smdPathFileName As String
@@ -256,8 +256,8 @@ Public Class SourceModel14
 		Return status
 	End Function
 
-	Public Overrides Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overrides Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim aSequenceDesc As SourceMdlSequenceDesc10
 		Dim smdPath As String
@@ -345,8 +345,8 @@ Public Class SourceModel14
 	'	Return status
 	'End Function
 
-	Public Overloads Function WriteBoneAnimationSmdFile(ByVal smdPathFileName As String, ByVal aSequence As SourceMdlSequenceDesc10, ByVal blendIndex As Integer) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overloads Function WriteBoneAnimationSmdFile(ByVal smdPathFileName As String, ByVal aSequence As SourceMdlSequenceDesc10, ByVal blendIndex As Integer) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Try
 			Me.theOutputFileTextWriter = File.CreateText(smdPathFileName)
@@ -419,8 +419,8 @@ Public Class SourceModel14
 			Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
 			Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
 			Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
-			) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+			) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim debugPathFileName As String
 
@@ -628,8 +628,8 @@ Public Class SourceModel14
 		'End If
 	End Sub
 
-	Protected Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal aModel As SourceMdlModel14) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Protected Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal aModel As SourceMdlModel14) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Try
 			Me.theOutputFileTextWriter = File.CreateText(smdPathFileName)

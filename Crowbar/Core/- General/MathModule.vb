@@ -54,7 +54,7 @@ Module MathModule
 		If suffix <> "" Then
 			suffix = " " + suffix
 		End If
-		Return value.ToString("0.##", TheApp.InternalCultureInfo) + suffix
+		Return value.ToString("0.##", Settings.InternalCultureInfo) + suffix
 	End Function
 
 	'Public Function DecimalByteUnitsConversion(ByVal iBytes As ULong) As String

@@ -38,11 +38,11 @@ Public Class SourceSmdFile14
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -57,7 +57,7 @@ Public Class SourceSmdFile14
 		line = "skeleton"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0"
 		Else
 			line = "  time 0"
@@ -65,22 +65,22 @@ Public Class SourceSmdFile14
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 			line = "    "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", Settings.InternalNumberFormat)
 			'line += Me.theSourceEngineModel.theMdlFileHeader.theBones(boneIndex).positionY.ToString("0.000000", TheApp.InternalNumberFormat)
 			'line += " "
 			'line += (-Me.theSourceEngineModel.theMdlFileHeader.theBones(boneIndex).positionX).ToString("0.000000", TheApp.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -106,7 +106,7 @@ Public Class SourceSmdFile14
 			Me.theAnimationFrameLines.Clear()
 			Me.CalcAnimation(aSequenceDesc, blendIndex, frameIndex)
 
-			If TheApp.Settings.DecompileStricterFormatIsChecked Then
+			If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 				line = "time "
 			Else
 				line = "  time "
@@ -194,21 +194,21 @@ Public Class SourceSmdFile14
 				End If
 
 				line = "    "
-				line += boneIndex.ToString(TheApp.InternalNumberFormat)
+				line += boneIndex.ToString(Settings.InternalNumberFormat)
 
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 				line += " "
-				line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 				'If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
 				'	line += "   # "
@@ -329,35 +329,35 @@ Public Class SourceSmdFile14
 		line = ""
 		Try
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 
 			line += " "
-			line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += uv.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += uv.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += (-uv.y).ToString("0.000000", TheApp.InternalNumberFormat)
+			line += (-uv.y).ToString("0.000000", Settings.InternalNumberFormat)
 
 			If weighting.boneCount > 0 Then
 				line += " "
-				line += weighting.boneCount.ToString(TheApp.InternalNumberFormat)
+				line += weighting.boneCount.ToString(Settings.InternalNumberFormat)
 				For x As Integer = 0 To weighting.boneCount - 1
 					line += " "
-					line += weightingHeader.theWeightingBoneDatas(0).theWeightingBoneIndexes(weighting.bones(x)).ToString(TheApp.InternalNumberFormat)
+					line += weightingHeader.theWeightingBoneDatas(0).theWeightingBoneIndexes(weighting.bones(x)).ToString(Settings.InternalNumberFormat)
 					line += " "
-					line += weighting.weights(x).ToString("0.000000", TheApp.InternalNumberFormat)
+					line += weighting.weights(x).ToString("0.000000", Settings.InternalNumberFormat)
 				Next
 			End If
 		Catch ex As Exception

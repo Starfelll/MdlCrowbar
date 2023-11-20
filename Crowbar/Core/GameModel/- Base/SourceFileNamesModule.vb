@@ -125,7 +125,7 @@ Module SourceFileNamesModule
 			End Try
 			bodyModelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(bodyModelFileName)
 
-			If TheApp.Settings.DecompilePrefixFileNamesWithModelNameIsChecked AndAlso Not bodyModelFileName.ToLower(TheApp.InternalCultureInfo).StartsWith(modelName.ToLower(TheApp.InternalCultureInfo)) Then
+			If Settings.DecompilerSettings.DecompilePrefixFileNamesWithModelNameIsChecked AndAlso Not bodyModelFileName.ToLower(Settings.InternalCultureInfo).StartsWith(modelName.ToLower(Settings.InternalCultureInfo)) Then
 				bodyGroupSmdFileName += modelName + "_"
 			End If
 			bodyGroupSmdFileName += bodyModelFileNameWithoutExtension
@@ -152,8 +152,8 @@ Module SourceFileNamesModule
 		Dim path As String
 
 		path = ""
-		If TheApp.Settings.DecompileBoneAnimationPlaceInSubfolderIsChecked Then
-			path = modelName + "_" + TheApp.AnimsSubFolderName
+		If Settings.DecompilerSettings.DecompileBoneAnimationPlaceInSubfolderIsChecked Then
+			path = modelName + "_" + Settings.AnimsSubFolderName
 		End If
 
 		Return path
@@ -202,7 +202,7 @@ Module SourceFileNamesModule
 			End If
 
 			' If anims are not stored in anims folder, add some more to the name.
-			If Not TheApp.Settings.DecompileBoneAnimationPlaceInSubfolderIsChecked Then
+			If Not Settings.DecompilerSettings.DecompileBoneAnimationPlaceInSubfolderIsChecked Then
 				animationName = modelName + "_anim_" + iAnimationName
 			End If
 
@@ -376,12 +376,12 @@ Module SourceFileNamesModule
 
 		'NOTE: Starting this at 1 means the first file name will not have a number and the second name will have a 2.
 		Dim nameNumber As Integer = 1
-		While TheApp.SmdFileNames.Contains(smdFileName.ToLower(TheApp.InternalCultureInfo))
+		While Settings.SmdFileNames.Contains(smdFileName.ToLower(Settings.InternalCultureInfo))
 			nameNumber += 1
 			smdFileName = givenSmdFileName + "_" + nameNumber.ToString()
 		End While
 
-		TheApp.SmdFileNames.Add(smdFileName.ToLower(TheApp.InternalCultureInfo))
+		Settings.SmdFileNames.Add(smdFileName.ToLower(Settings.InternalCultureInfo))
 		Return smdFileName
 	End Function
 

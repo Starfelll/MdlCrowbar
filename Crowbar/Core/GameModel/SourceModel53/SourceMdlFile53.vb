@@ -25,7 +25,7 @@ Public Class SourceMdlFile53
 
 #Region "Methods"
 
-	Public Sub ReadMdlHeader00(ByVal logDescription As String)
+	Public Sub ReadMdlHeader00(Optional ByVal logDescription As String = "MDL File Header 00")
 		Dim fileOffsetStart As Long
 		Dim fileOffsetEnd As Long
 
@@ -56,7 +56,7 @@ Public Class SourceMdlFile53
 		End If
 	End Sub
 
-	Public Sub ReadMdlHeader01(ByVal logDescription As String)
+	Public Sub ReadMdlHeader01(Optional ByVal logDescription As String = "MDL File Header 01")
 		'Dim inputFileStreamPosition As Long
 		Dim fileOffsetStart As Long
 		Dim fileOffsetEnd As Long

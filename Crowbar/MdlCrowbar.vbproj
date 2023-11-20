@@ -20,9 +20,9 @@
     <Compile Remove="Core\- General\BindingListEx.vb" />
     <Compile Remove="Core\- General\BindingListExAutoSort.vb" />
     <Compile Remove="Core\- General\DuplicateKeyComparer.vb" />
+    <Compile Remove="Core\- General\PropertyComparer.vb" />
     <Compile Remove="Core\- General\WindowsJob.vb" />
     <Compile Remove="Core\- General\Workarounds.vb" />
-    <Compile Remove="Core\DebugLog\DebugFormatModule.vb" />
     <Compile Remove="Core\GameModel\CompiledFiles\AniFile\AniFile44\SourceAniFile44.vb" />
   </ItemGroup>
 
@@ -58,12 +58,12 @@
     <AssemblyName>MdlCrowbar</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>MdlCrowbar</Title>
-    <VersionPrefix>0.74</VersionPrefix>
+    <VersionPrefix>0.74.1</VersionPrefix>
     <PackageProjectUrl>https://github.com/Starfelll/MdlCrowbar</PackageProjectUrl>
     <PackageIcon>crowbar_icon_large.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Starfelll</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description> .NET library for loading Source1/GoldSrc model (.mdl, .vtx, .vvd, .phy).   </Description>
+    <Description>loading/decompiling Source1/GoldSrc model (.mdl, .vtx, .vvd, .phy).</Description>
   </PropertyGroup>
 </Project>

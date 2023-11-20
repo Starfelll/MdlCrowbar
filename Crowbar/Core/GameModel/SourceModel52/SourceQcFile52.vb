@@ -45,7 +45,7 @@ Public Class SourceQcFile52
 #Region "Methods"
 
 	Public Sub WriteGroup(ByVal qciGroupName As String, ByVal writeGroupAction As WriteGroupDelegate, ByVal includeLineIsCommented As Boolean, ByVal includeLineIsIndented As Boolean)
-		If TheApp.Settings.DecompileGroupIntoQciFilesIsChecked Then
+		If Settings.DecompilerSettings.DecompileGroupIntoQciFilesIsChecked Then
 			Dim qciFileName As String
 			Dim qciPathFileName As String
 			Dim mainOutputFileStream As StreamWriter
@@ -88,7 +88,7 @@ Public Class SourceQcFile52
 						If includeLineIsIndented Then
 							line += vbTab
 						End If
-						If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+						If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 							line += "$Include "
 						Else
 							line += "$include "
@@ -124,7 +124,7 @@ Public Class SourceQcFile52
 
 		'$modelname "survivors/survivor_producer.mdl"
 		'$modelname "custom/survivor_producer.mdl"
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line = "$ModelName "
 		Else
 			line = "$modelname "
@@ -141,7 +141,7 @@ Public Class SourceQcFile52
 		Me.theOutputFileStreamWriter.WriteLine()
 
 		'$include "Rochelle_world.qci"
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line += "$Include "
 		Else
 			line += "$include "
@@ -163,7 +163,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_STATIC_PROP) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$StaticProp"
 			Else
 				line = "$staticprop"
@@ -179,7 +179,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_CONSTANT_DIRECTIONAL_LIGHT_DOT) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$ConstantDirectionalLight "
 			Else
 				line = "$constantdirectionallight "
@@ -220,12 +220,12 @@ Public Class SourceQcFile52
 		'$fadedist -1.0
 		Me.theOutputFileStreamWriter.WriteLine()
 
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line = "//$FadeDist "
 		Else
 			line = "//$fadedist "
 		End If
-		line += Me.theMdlFileData.fadeDistance.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.theMdlFileData.fadeDistance.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -254,7 +254,7 @@ Public Class SourceQcFile52
 			'referenceSmdFileName = theSourceEngineModel.GetLodSmdFileName(0)
 			aBodyModel.theSmdFileNames(0) = SourceFileNamesModule.CreateBodyGroupSmdFileName(aBodyModel.theSmdFileNames(0), Me.theMdlFileData.theBodyPartIndexThatShouldUseModelCommand, 0, 0, Me.theModelName, aBodyPart.theModels(0).name)
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$Model "
 			Else
 				line = "$model "
@@ -357,7 +357,7 @@ Public Class SourceQcFile52
 						ElseIf eyeballIndex = 1 AndAlso angle < 0 Then
 							eyeballNames.Add("eye_left")
 						Else
-							eyeballNames.Add("eye_" + eyeballIndex.ToString(TheApp.InternalNumberFormat))
+							eyeballNames.Add("eye_" + eyeballIndex.ToString(Settings.InternalNumberFormat))
 						End If
 
 						If anEyeball.theTextureIndex = -1 Then
@@ -373,22 +373,22 @@ Public Class SourceQcFile52
 						line += """ """
 						line += Me.theMdlFileData.theBones(anEyeball.boneIndex).theName
 						line += """ "
-						line += eyeballPosition.x.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.x.ToString("0.000000", Settings.InternalNumberFormat)
 						line += " "
-						line += eyeballPosition.y.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.y.ToString("0.000000", Settings.InternalNumberFormat)
 						line += " "
-						line += eyeballPosition.z.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.z.ToString("0.000000", Settings.InternalNumberFormat)
 						line += " """
 						line += eyeballTextureName
 						line += """ "
-						line += diameter.ToString("0.######", TheApp.InternalNumberFormat)
+						line += diameter.ToString("0.######", Settings.InternalNumberFormat)
 						line += " "
-						line += angle.ToString("0.######", TheApp.InternalNumberFormat)
+						line += angle.ToString("0.######", Settings.InternalNumberFormat)
 						line += " "
 						'Unused in later Source Engine versions.
 						line += """iris_unused"""
 						line += " "
-						line += Math.Round(irisScale, 6).ToString("0.######", TheApp.InternalNumberFormat)
+						line += Math.Round(irisScale, 6).ToString("0.######", Settings.InternalNumberFormat)
 						Me.theOutputFileStreamWriter.WriteLine(line)
 
 						'NOTE: Used to write frame indexes for eyelid lines and prevent eyelid flexes from being written in flex list in qc file.
@@ -484,14 +484,14 @@ Public Class SourceQcFile52
 								End If
 							End If
 						Next
-						line += frameIndex.ToString(TheApp.InternalNumberFormat)
+						line += frameIndex.ToString(Settings.InternalNumberFormat)
 						line += " "
-						line += anEyeball.upperTarget(0).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(0).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "neutral 0"
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.upperFlexDesc(1)).theVtaFrameIndex.ToString()
 						line += " "
-						line += anEyeball.upperTarget(1).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(1).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "raiser "
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.upperFlexDesc(2)).theVtaFrameIndex.ToString()
@@ -511,9 +511,9 @@ Public Class SourceQcFile52
 								End If
 							End If
 						Next
-						line += frameIndex.ToString(TheApp.InternalNumberFormat)
+						line += frameIndex.ToString(Settings.InternalNumberFormat)
 						line += " "
-						line += anEyeball.upperTarget(2).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(2).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "split "
 						'TODO: simplify.cpp RemapVertexAnimations(); probably should call SourceMdlFile.GetSplit()?
@@ -557,14 +557,14 @@ Public Class SourceQcFile52
 								End If
 							End If
 						Next
-						line += frameIndex.ToString(TheApp.InternalNumberFormat)
+						line += frameIndex.ToString(Settings.InternalNumberFormat)
 						line += " "
-						line += anEyeball.lowerTarget(0).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(0).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "neutral 0"
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.lowerFlexDesc(1)).theVtaFrameIndex.ToString()
 						line += " "
-						line += anEyeball.lowerTarget(1).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(1).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "raiser "
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.lowerFlexDesc(2)).theVtaFrameIndex.ToString()
@@ -584,9 +584,9 @@ Public Class SourceQcFile52
 								End If
 							End If
 						Next
-						line += frameIndex.ToString(TheApp.InternalNumberFormat)
+						line += frameIndex.ToString(Settings.InternalNumberFormat)
 						line += " "
-						line += anEyeball.lowerTarget(2).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(2).ToString("0.##", Settings.InternalNumberFormat)
 						line += " "
 						line += "split "
 						'TODO: simplify.cpp RemapVertexAnimations(); probably should call SourceMdlFile.GetSplit()?
@@ -638,17 +638,17 @@ Public Class SourceQcFile52
 
 				line = vbTab
 				line += "mouth "
-				line += i.ToString(TheApp.InternalNumberFormat)
+				line += i.ToString(Settings.InternalNumberFormat)
 				line += " """
 				line += Me.theMdlFileData.theFlexDescs(aMouth.flexDescIndex).theName
 				line += """ """
 				line += Me.theMdlFileData.theBones(aMouth.boneIndex).theName
 				line += """ "
-				line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetX.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetY.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetZ.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 
 				Me.theMdlFileData.theFlexDescs(aMouth.flexDescIndex).theDescIsUsedByFlex = True
@@ -708,7 +708,7 @@ Public Class SourceQcFile52
 				line += """"
 				If aFlexFrame.flexHasPartner Then
 					line += " "
-					line += aFlexFrame.flexSplit.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aFlexFrame.flexSplit.ToString("0.######", Settings.InternalNumberFormat)
 				End If
 				line += " frame "
 				line += CStr(frameIndex)
@@ -830,9 +830,9 @@ Public Class SourceQcFile52
 				line += aFlexController.theType
 				line += " "
 				line += "range "
-				line += aFlexController.min.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFlexController.min.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aFlexController.max.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFlexController.max.ToString("0.######", Settings.InternalNumberFormat)
 				line += " """
 				line += aFlexController.theName
 				line += """"
@@ -1220,12 +1220,12 @@ Public Class SourceQcFile52
 
 				aLodQcInfoList = aLodList.Values(lodListIndex)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$LOD "
 				Else
 					line = "$lod "
 				End If
-				line += switchPoint.ToString("0.######", TheApp.InternalNumberFormat)
+				line += switchPoint.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 
 				line = "{"
@@ -1241,7 +1241,7 @@ Public Class SourceQcFile52
 				'// Shadow lod reserves -1 as switch value
 				'// which uniquely identifies a shadow lod
 				'newLOD.switchValue = -1.0f;
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$ShadowLOD"
 				Else
 					line = "$shadowlod"
@@ -1326,13 +1326,13 @@ Public Class SourceQcFile52
 
 		line = vbTab
 		If lodUsesFacial Then
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line += "Facial"
 			Else
 				line += "facial"
 			End If
 		Else
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line += "NoFacial"
 			Else
 				line += "nofacial"
@@ -1343,7 +1343,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_USE_SHADOWLOD_MATERIALS) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "Use_ShadowLOD_Materials"
 			Else
 				line = "use_shadowlod_materials"
@@ -1359,7 +1359,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_NO_FORCED_FADE) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$NoForcedFade"
 			Else
 				line = "$noforcedfade"
@@ -1375,7 +1375,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_FORCE_PHONEME_CROSSFADE) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$ForcePhonemeCrossFade"
 			Else
 				line = "$forcephonemecrossfade"
@@ -1402,18 +1402,18 @@ Public Class SourceQcFile52
 			For i As Integer = 0 To Me.theMdlFileData.thePoseParamDescs.Count - 1
 				Dim aPoseParamDesc As SourceMdlPoseParamDesc
 				aPoseParamDesc = Me.theMdlFileData.thePoseParamDescs(i)
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$PoseParameter """
 				Else
 					line = "$poseparameter """
 				End If
 				line += aPoseParamDesc.theName
 				line += """ "
-				line += aPoseParamDesc.startingValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.startingValue.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aPoseParamDesc.endingValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.endingValue.ToString("0.######", Settings.InternalNumberFormat)
 				line += " loop "
-				line += aPoseParamDesc.loopingRange.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.loopingRange.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		End If
@@ -1426,7 +1426,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_AMBIENT_BOOST) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$AmbientBoost"
 			Else
 				line = "$ambientboost"
@@ -1443,7 +1443,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_FORCE_OPAQUE) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$Opaque"
 			Else
 				line = "$opaque"
@@ -1452,7 +1452,7 @@ Public Class SourceQcFile52
 		ElseIf (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_TRANSLUCENT_TWOPASS) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$MostlyOpaque"
 			Else
 				line = "$mostlyopaque"
@@ -1468,7 +1468,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_OBSOLETE) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$Obsolete"
 			Else
 				line = "$obsolete"
@@ -1484,7 +1484,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_CAST_TEXTURE_SHADOWS) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$CastTextureShadows"
 			Else
 				line = "$casttextureshadows"
@@ -1500,7 +1500,7 @@ Public Class SourceQcFile52
 		If (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_DO_NOT_CAST_SHADOWS) > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$DoNotCastShadows"
 			Else
 				line = "$donotcastshadows"
@@ -1526,7 +1526,7 @@ Public Class SourceQcFile52
 				Dim aTexturePath As String
 				aTexturePath = texturePaths(i)
 				'NOTE: Write out all stored paths, even if null or empty strings, because Crowbar should show what was stored.
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$CDMaterials "
 				Else
 					line = "$cdmaterials "
@@ -1547,7 +1547,7 @@ Public Class SourceQcFile52
 
 		If Me.theMdlFileData.theSkinFamilies IsNot Nothing AndAlso Me.theMdlFileData.theSkinFamilies.Count > 0 AndAlso textureFileNames IsNot Nothing AndAlso textureFileNames.Count > 0 AndAlso Me.theMdlFileData.skinReferenceCount > 0 Then
 			Dim processedSkinFamilies As List(Of List(Of Short))
-			If TheApp.Settings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked Then
 				processedSkinFamilies = Me.GetSkinFamiliesOfChangedMaterials(Me.theMdlFileData.theSkinFamilies)
 			Else
 				processedSkinFamilies = Me.theMdlFileData.theSkinFamilies
@@ -1572,10 +1572,10 @@ Public Class SourceQcFile52
 				skinFamiliesOfTextureFileNames.Add(textureFileNamesForSkinFamily)
 			Next
 
-			If (Not TheApp.Settings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked) OrElse (skinFamiliesOfTextureFileNames.Count > 1) Then
+			If (Not Settings.DecompilerSettings.DecompileQcOnlyChangedMaterialsInTextureGroupLinesIsChecked) OrElse (skinFamiliesOfTextureFileNames.Count > 1) Then
 				Me.theOutputFileStreamWriter.WriteLine()
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$TextureGroup ""skinfamilies"""
 				Else
 					line = "$texturegroup ""skinfamilies"""
@@ -1604,7 +1604,7 @@ Public Class SourceQcFile52
 		'// Model uses material "models/survivors/producer/producer_hair.vmt"
 		'// Model uses material "models/survivors/producer/producer_eyeball_l.vmt"
 		'// Model uses material "models/survivors/producer/producer_eyeball_r.vmt"
-		If TheApp.Settings.DecompileDebugInfoFilesIsChecked AndAlso Me.theMdlFileData.theTextures IsNot Nothing Then
+		If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked AndAlso Me.theMdlFileData.theTextures IsNot Nothing Then
 			Dim line As String
 
 			line = ""
@@ -1670,13 +1670,13 @@ Public Class SourceQcFile52
 			For i As Integer = 0 To Me.theMdlFileData.theAttachments.Count - 1
 				Dim anAttachment As SourceMdlAttachment
 				anAttachment = Me.theMdlFileData.theAttachments(i)
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$Attachment "
 				Else
 					line = "$attachment "
 				End If
 				If anAttachment.theName = "" Then
-					line += i.ToString(TheApp.InternalNumberFormat)
+					line += i.ToString(Settings.InternalNumberFormat)
 				Else
 					line += """"
 					line += anAttachment.theName
@@ -1688,11 +1688,11 @@ Public Class SourceQcFile52
 				line += " "
 
 				If Me.theMdlFileData.version = 10 Then
-					line += anAttachment.attachmentPoint.x.ToString("0.######", TheApp.InternalNumberFormat)
+					line += anAttachment.attachmentPoint.x.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += anAttachment.attachmentPoint.y.ToString("0.######", TheApp.InternalNumberFormat)
+					line += anAttachment.attachmentPoint.y.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += anAttachment.attachmentPoint.z.ToString("0.######", TheApp.InternalNumberFormat)
+					line += anAttachment.attachmentPoint.z.ToString("0.######", Settings.InternalNumberFormat)
 				Else
 					'TheApp.ConvertRotationMatrixToDegrees(anAttachment.localM11, anAttachment.localM12, anAttachment.localM13, anAttachment.localM21, anAttachment.localM22, anAttachment.localM23, anAttachment.localM33, angleX, angleY, angleZ)
 					'NOTE: This one works with the strange order below.
@@ -1703,11 +1703,11 @@ Public Class SourceQcFile52
 					angleX = Math.Round(angleX, 2)
 					angleY = Math.Round(angleY, 2)
 					angleZ = Math.Round(angleZ, 2)
-					line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetX.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetY.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetZ.ToString("0.######", Settings.InternalNumberFormat)
 					line += " rotate "
 					''NOTE: Intentionally z,y,x order.
 					'line += angleZ.ToString()
@@ -1716,11 +1716,11 @@ Public Class SourceQcFile52
 					'line += " "
 					'line += angleX.ToString()
 					'NOTE: Intentionally in strange order.
-					line += angleY.ToString("0.######", TheApp.InternalNumberFormat)
+					line += angleY.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += (-angleZ).ToString("0.######", TheApp.InternalNumberFormat)
+					line += (-angleZ).ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += (-angleX).ToString("0.######", TheApp.InternalNumberFormat)
+					line += (-angleX).ToString("0.######", Settings.InternalNumberFormat)
 				End If
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
@@ -1739,7 +1739,7 @@ Public Class SourceQcFile52
 			For i As Integer = 0 To Me.theMdlFileData.theModelGroups.Count - 1
 				Dim aModelGroup As SourceMdlModelGroup
 				aModelGroup = Me.theMdlFileData.theModelGroups(i)
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$IncludeModel "
 				Else
 					line = "$includemodel "
@@ -1764,7 +1764,7 @@ Public Class SourceQcFile52
 			Me.theOutputFileStreamWriter.WriteLine(line)
 
 			'$surfaceprop "flesh"
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$SurfaceProp "
 			Else
 				line = "$surfaceprop "
@@ -1796,7 +1796,7 @@ Public Class SourceQcFile52
 						emptyLineIsAlreadyWritten = True
 					End If
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$JointSurfaceProp "
 					Else
 						line = "$jointsurfaceprop "
@@ -1822,7 +1822,7 @@ Public Class SourceQcFile52
 			Me.theOutputFileStreamWriter.WriteLine(line)
 
 			'$contents "monster" "grate"
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$Contents"
 			Else
 				line = "$contents"
@@ -1851,7 +1851,7 @@ Public Class SourceQcFile52
 						emptyLineIsAlreadyWritten = True
 					End If
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$JointContents "
 					Else
 						line = "$jointcontents "
@@ -1961,16 +1961,16 @@ Public Class SourceQcFile52
 		'eyeposition[1] = verify_atof (token);
 		'eyeposition[0] = -verify_atof (token);
 		'eyeposition[2] = verify_atof (token);
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line = "$EyePosition "
 		Else
 			line = "$eyeposition "
 		End If
-		line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetZ.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -1986,12 +1986,12 @@ Public Class SourceQcFile52
 			line = ""
 			Me.theOutputFileStreamWriter.WriteLine(line)
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$MaxEyeDeflection "
 			Else
 				line = "$maxeyedeflection "
 			End If
-			line += deflection.ToString("0.######", TheApp.InternalNumberFormat)
+			line += deflection.ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 	End Sub
@@ -2010,16 +2010,16 @@ Public Class SourceQcFile52
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		line = ""
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line += "$IllumPosition "
 		Else
 			line += "$illumposition "
 		End If
-		line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetZ.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -2058,7 +2058,7 @@ Public Class SourceQcFile52
 			line = "// The 32 below is a guess until further is known about the format."
 			Me.theOutputFileStreamWriter.WriteLine(line)
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$AnimBlockSize"
 			Else
 				line = "$animblocksize"
@@ -2080,15 +2080,15 @@ Public Class SourceQcFile52
 		If Me.theMdlFileData.theSectionFrameCount > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$SectionFrames"
 			Else
 				line = "$sectionframes"
 			End If
 			line += " "
-			line += Me.theMdlFileData.theSectionFrameCount.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theSectionFrameCount.ToString(Settings.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theSectionFrameMinFrameCount.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theSectionFrameMinFrameCount.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 	End Sub
@@ -2184,7 +2184,7 @@ Public Class SourceQcFile52
 		For Each aWeightList As SourceMdlWeightList In Me.theMdlFileData.theWeightLists
 			Me.theOutputFileStreamWriter.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$WeightList "
 			Else
 				line = "$weightlist "
@@ -2201,7 +2201,7 @@ Public Class SourceQcFile52
 				line += " """
 				line += Me.theMdlFileData.theBones(boneWeightIndex).theName
 				line += """ "
-				line += aWeightList.theWeights(boneWeightIndex).ToString("0.######", TheApp.InternalNumberFormat)
+				line += aWeightList.theWeights(boneWeightIndex).ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(commentTag + line)
 			Next
 
@@ -2229,7 +2229,7 @@ Public Class SourceQcFile52
 		Me.theOutputFileStreamWriter.WriteLine()
 
 		If (anAnimationDesc.flags And SourceMdlAnimationDesc.STUDIO_OVERRIDE) > 0 Then
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$DeclareAnimation"
 			Else
 				line = "$declareanimation"
@@ -2242,7 +2242,7 @@ Public Class SourceQcFile52
 		Else
 			'$animation a_reference "primary_idle.dmx" lx ly
 			'NOTE: The $Animation command must have name first and file name second and on same line as the command.
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$Animation"
 			Else
 				line = "$animation"
@@ -2283,7 +2283,7 @@ Public Class SourceQcFile52
 		Me.theOutputFileStreamWriter.WriteLine()
 
 		If (aSequenceDesc.flags And SourceMdlAnimationDesc.STUDIO_OVERRIDE) > 0 Then
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$DeclareSequence"
 			Else
 				line = "$declaresequence"
@@ -2294,7 +2294,7 @@ Public Class SourceQcFile52
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Else
 			If aSequenceDesc.theAnimDescIndexes IsNot Nothing OrElse aSequenceDesc.theAnimDescIndexes.Count > 0 Then
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$Sequence "
 				Else
 					line = "$sequence "
@@ -2379,7 +2379,7 @@ Public Class SourceQcFile52
 			line += """"
 			line += aSequenceDesc.theActivityName
 			line += """ "
-			line += aSequenceDesc.activityWeight.ToString(TheApp.InternalNumberFormat)
+			line += aSequenceDesc.activityWeight.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 
@@ -2403,7 +2403,7 @@ Public Class SourceQcFile52
 		If aSequenceDesc.groupSize(0) <> aSequenceDesc.groupSize(1) Then
 			line = vbTab
 			line += "blendwidth "
-			line += aSequenceDesc.groupSize(0).ToString(TheApp.InternalNumberFormat)
+			line += aSequenceDesc.groupSize(0).ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 
@@ -2424,7 +2424,7 @@ Public Class SourceQcFile52
 				line += "event "
 				line += aSequenceDesc.theEvents(j).theName
 				line += " "
-				line += frameIndex.ToString(TheApp.InternalNumberFormat)
+				line += frameIndex.ToString(Settings.InternalNumberFormat)
 				If aSequenceDesc.theEvents(j).options <> "" Then
 					line += " """
 					line += CStr(aSequenceDesc.theEvents(j).options).Trim(Chr(0))
@@ -2435,13 +2435,13 @@ Public Class SourceQcFile52
 			Next
 		End If
 
-		valueString = aSequenceDesc.fadeInTime.ToString("0.######", TheApp.InternalNumberFormat)
+		valueString = aSequenceDesc.fadeInTime.ToString("0.######", Settings.InternalNumberFormat)
 		line = vbTab
 		line += "fadein "
 		line += valueString
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		valueString = aSequenceDesc.fadeOutTime.ToString("0.######", TheApp.InternalNumberFormat)
+		valueString = aSequenceDesc.fadeOutTime.ToString("0.######", Settings.InternalNumberFormat)
 		line = vbTab
 		line += "fadeout "
 		line += valueString
@@ -2470,9 +2470,9 @@ Public Class SourceQcFile52
 				line += Me.theMdlFileData.theIkChains(ikLock.chainIndex).theName
 				line += """"
 				line += " "
-				line += ikLock.posWeight.ToString("0.######", TheApp.InternalNumberFormat)
+				line += ikLock.posWeight.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += ikLock.localQWeight.ToString("0.######", TheApp.InternalNumberFormat)
+				line += ikLock.localQWeight.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		End If
@@ -2549,7 +2549,7 @@ Public Class SourceQcFile52
 
 		line = vbTab
 		line += "fps "
-		line += anAnimationDesc.fps.ToString("0.######", TheApp.InternalNumberFormat)
+		line += anAnimationDesc.fps.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		If aSequenceDesc Is Nothing Then
@@ -2910,9 +2910,9 @@ Public Class SourceQcFile52
 				line += Me.theMdlFileData.thePoseParamDescs(aSeqDesc.paramIndex(i)).theName
 				line += """"
 				line += " "
-				line += aSeqDesc.paramStart(i).ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSeqDesc.paramStart(i).ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aSeqDesc.paramEnd(i).ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSeqDesc.paramEnd(i).ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 		Next
@@ -2969,15 +2969,15 @@ Public Class SourceQcFile52
 					If (layer.flags And SourceMdlAutoLayer.STUDIO_AL_POSE) = 0 Then
 						Dim anAnimationDesc As SourceMdlAnimationDesc52
 						anAnimationDesc = Me.theMdlFileData.theAnimationDescs(aSeqDesc.theAnimDescIndexes(0))
-						influenceStart = (layer.influenceStart * (anAnimationDesc.frameCount - 1)).ToString("0", TheApp.InternalNumberFormat)
-						influencePeak = (layer.influencePeak * (anAnimationDesc.frameCount - 1)).ToString("0", TheApp.InternalNumberFormat)
-						influenceTail = (layer.influenceTail * (anAnimationDesc.frameCount - 1)).ToString("0", TheApp.InternalNumberFormat)
-						influenceEnd = (layer.influenceEnd * (anAnimationDesc.frameCount - 1)).ToString("0", TheApp.InternalNumberFormat)
+						influenceStart = (layer.influenceStart * (anAnimationDesc.frameCount - 1)).ToString("0", Settings.InternalNumberFormat)
+						influencePeak = (layer.influencePeak * (anAnimationDesc.frameCount - 1)).ToString("0", Settings.InternalNumberFormat)
+						influenceTail = (layer.influenceTail * (anAnimationDesc.frameCount - 1)).ToString("0", Settings.InternalNumberFormat)
+						influenceEnd = (layer.influenceEnd * (anAnimationDesc.frameCount - 1)).ToString("0", Settings.InternalNumberFormat)
 					Else
-						influenceStart = layer.influenceStart.ToString("0.######", TheApp.InternalNumberFormat)
-						influencePeak = layer.influencePeak.ToString("0.######", TheApp.InternalNumberFormat)
-						influenceTail = layer.influenceTail.ToString("0.######", TheApp.InternalNumberFormat)
-						influenceEnd = layer.influenceEnd.ToString("0.######", TheApp.InternalNumberFormat)
+						influenceStart = layer.influenceStart.ToString("0.######", Settings.InternalNumberFormat)
+						influencePeak = layer.influencePeak.ToString("0.######", Settings.InternalNumberFormat)
+						influenceTail = layer.influenceTail.ToString("0.######", Settings.InternalNumberFormat)
+						influenceEnd = layer.influenceEnd.ToString("0.######", Settings.InternalNumberFormat)
 					End If
 					line += " "
 					line += influenceStart
@@ -3085,13 +3085,13 @@ Public Class SourceQcFile52
 				End If
 				line += """"
 				line += " range "
-				line += startInfluence.ToString("0.######", TheApp.InternalNumberFormat)
+				line += startInfluence.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += peakInfluence.ToString("0.######", TheApp.InternalNumberFormat)
+				line += peakInfluence.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += tailInfluence.ToString("0.######", TheApp.InternalNumberFormat)
+				line += tailInfluence.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += endInfluence.ToString("0.######", TheApp.InternalNumberFormat)
+				line += endInfluence.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		End If
@@ -3119,7 +3119,7 @@ Public Class SourceQcFile52
 					offsetY = Math.Round(Me.theMdlFileData.theIkChains(i).theLinks(0).idealBendingDirection.y, 3)
 					offsetZ = Math.Round(Me.theMdlFileData.theIkChains(i).theLinks(0).idealBendingDirection.z, 3)
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$IKChain """
 					Else
 						line = "$ikchain """
@@ -3128,11 +3128,11 @@ Public Class SourceQcFile52
 					line += """ """
 					line += Me.theMdlFileData.theBones(boneIndex).theName
 					line += """ knee "
-					line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetX.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetY.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+					line += offsetZ.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -3156,7 +3156,7 @@ Public Class SourceQcFile52
 				For i As Integer = 0 To Me.theMdlFileData.theIkLocks.Count - 1
 					ikLock = Me.theMdlFileData.theIkLocks(i)
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$IKAutoPlayLock """
 					Else
 						line = "$ikautoplaylock """
@@ -3164,9 +3164,9 @@ Public Class SourceQcFile52
 					line += Me.theMdlFileData.theIkChains(ikLock.chainIndex).theName
 					line += """"
 					line += " "
-					line += ikLock.posWeight.ToString("0.######", TheApp.InternalNumberFormat)
+					line += ikLock.posWeight.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += ikLock.localQWeight.ToString("0.######", TheApp.InternalNumberFormat)
+					line += ikLock.localQWeight.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -3197,7 +3197,7 @@ Public Class SourceQcFile52
 							emptyLineIsAlreadyWritten = True
 						End If
 
-						If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+						If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 							line = "$BoneSaveFrame "
 						Else
 							line = "$bonesaveframe "
@@ -3358,13 +3358,13 @@ Public Class SourceQcFile52
 			'      Same for w_minigun. Both use $concave.
 			'If Me.theSourceEngineModel.thePhyFileHeader.solidCount = 1 Then
 			If Me.thePhyFileData.theSourcePhyCollisionDatas.Count = 1 Then
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$CollisionModel "
 				Else
 					line = "$collisionmodel "
 				End If
 			Else
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$CollisionJoints "
 				Else
 					line = "$collisionjoints "
@@ -3418,19 +3418,19 @@ Public Class SourceQcFile52
 		' for some reason it doesn't read this correctly so I am doing a janky fix for now.
 		line = vbTab
 		line += "$mass "
-		line += Me.theMdlFileData.mass.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.theMdlFileData.mass.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$inertia "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$damping "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$rotdamping "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		If Me.thePhyFileData.theSourcePhyEditParamsSection.rootName <> "" Then
 			line = vbTab
@@ -3474,7 +3474,7 @@ Public Class SourceQcFile52
 				line += "$jointmassbias """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theMassBias.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theMassBias.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -3483,7 +3483,7 @@ Public Class SourceQcFile52
 				line += "$jointdamping """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theDamping.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theDamping.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -3492,7 +3492,7 @@ Public Class SourceQcFile52
 				line += "$jointinertia """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theInertia.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theInertia.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -3501,7 +3501,7 @@ Public Class SourceQcFile52
 				line += "$jointrotdamping """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theRotDamping.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theRotDamping.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -3525,31 +3525,31 @@ Public Class SourceQcFile52
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ x limit "
-				line += aConstraint.theXMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theXMin.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theXMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theXMax.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += xFrictionValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += xFrictionValue.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 				line = vbTab
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ y limit "
-				line += aConstraint.theYMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theYMin.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theYMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theYMax.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += yFrictionValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += yFrictionValue.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 				line = vbTab
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ z limit "
-				line += aConstraint.theZMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theZMin.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theZMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theZMax.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += zFrictionValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += zFrictionValue.ToString("0.######", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 		Next
@@ -3585,7 +3585,7 @@ Public Class SourceQcFile52
 				line = ""
 				Me.theOutputFileStreamWriter.WriteLine(line)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$CollisionText"
 				Else
 					line = "$collisiontext"
@@ -3616,7 +3616,7 @@ Public Class SourceQcFile52
 	End Sub
 
 	Private Sub WriteDefineBoneCommand()
-		If Not TheApp.Settings.DecompileQcIncludeDefineBoneLinesIsChecked Then
+		If Not Settings.DecompilerSettings.DecompileQcIncludeDefineBoneLinesIsChecked Then
 			Exit Sub
 		End If
 
@@ -3644,7 +3644,7 @@ Public Class SourceQcFile52
 					aParentBoneName = Me.theMdlFileData.theBones(aBone.parentBoneIndex).theName
 				End If
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$DefineBone "
 				Else
 					line = "$definebone "
@@ -3658,18 +3658,18 @@ Public Class SourceQcFile52
 				line += """"
 
 				line += " "
-				line += aBone.position.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.x.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aBone.position.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.y.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aBone.position.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.z.ToString("0.######", Settings.InternalNumberFormat)
 
 				line += " "
-				line += MathModule.RadiansToDegrees(aBone.rotation.y).ToString("0.######", TheApp.InternalNumberFormat)
+				line += MathModule.RadiansToDegrees(aBone.rotation.y).ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += MathModule.RadiansToDegrees(aBone.rotation.z).ToString("0.######", TheApp.InternalNumberFormat)
+				line += MathModule.RadiansToDegrees(aBone.rotation.z).ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += MathModule.RadiansToDegrees(aBone.rotation.x).ToString("0.######", TheApp.InternalNumberFormat)
+				line += MathModule.RadiansToDegrees(aBone.rotation.x).ToString("0.######", Settings.InternalNumberFormat)
 
 				'TODO: These fixups are all zeroes for now.
 				'      They might be found in the srcbonetransform list.
@@ -3710,18 +3710,18 @@ Public Class SourceQcFile52
 				'}
 
 				line += " "
-				line += aFixupPosition.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.x.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aFixupPosition.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.y.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aFixupPosition.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.z.ToString("0.######", Settings.InternalNumberFormat)
 
 				line += " "
-				line += aFixupRotation.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.x.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aFixupRotation.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.y.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aFixupRotation.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.z.ToString("0.######", Settings.InternalNumberFormat)
 
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
@@ -3734,7 +3734,7 @@ Public Class SourceQcFile52
 			Me.theOutputFileStreamWriter.WriteLine()
 
 			Dim line As String = ""
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line += "$ProceduralBones "
 			Else
 				line += "$proceduralbones "
@@ -3764,7 +3764,7 @@ Public Class SourceQcFile52
 						emptyLineIsAlreadyWritten = True
 					End If
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$BoneMerge "
 					Else
 						line = "$bonemerge "
@@ -3792,7 +3792,7 @@ Public Class SourceQcFile52
 			Dim aBone As SourceMdlBone52
 			aBone = Me.theMdlFileData.theBones(i)
 			If aBone.proceduralRuleType = SourceMdlBone52.STUDIO_PROC_JIGGLE AndAlso aBone.proceduralRuleOffset <> 0 Then
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$JiggleBone "
 				Else
 					line = "$jigglebone "
@@ -3814,33 +3814,33 @@ Public Class SourceQcFile52
 					line = vbTab
 					line += vbTab
 					line += "length "
-					line += aBone.theJiggleBone.length.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.length.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "tip_mass "
-					line += aBone.theJiggleBone.tipMass.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.tipMass.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					line = vbTab
 					line += vbTab
 					line += "pitch_stiffness "
-					line += aBone.theJiggleBone.pitchStiffness.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.pitchStiffness.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "pitch_damping "
-					line += aBone.theJiggleBone.pitchDamping.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.pitchDamping.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "yaw_stiffness "
-					line += aBone.theJiggleBone.yawStiffness.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.yawStiffness.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "yaw_damping "
-					line += aBone.theJiggleBone.yawDamping.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.yawDamping.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					'else if "allow_length_flex"
@@ -3854,12 +3854,12 @@ Public Class SourceQcFile52
 					line = vbTab
 					line += vbTab
 					line += "along_stiffness "
-					line += aBone.theJiggleBone.alongStiffness.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.alongStiffness.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "along_damping "
-					line += aBone.theJiggleBone.alongDamping.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.alongDamping.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					Me.WriteJiggleBoneConstraints(aBone)
@@ -3879,12 +3879,12 @@ Public Class SourceQcFile52
 					line = vbTab
 					line += vbTab
 					line += "length "
-					line += aBone.theJiggleBone.length.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.length.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "tip_mass "
-					line += aBone.theJiggleBone.tipMass.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.tipMass.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					Me.WriteJiggleBoneConstraints(aBone)
@@ -3904,17 +3904,17 @@ Public Class SourceQcFile52
 					line = vbTab
 					line += vbTab
 					line += "base_mass "
-					line += aBone.theJiggleBone.baseMass.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMass.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "stiffness "
-					line += aBone.theJiggleBone.baseStiffness.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseStiffness.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "damping "
-					line += aBone.theJiggleBone.baseDamping.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseDamping.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					line = vbTab
@@ -3923,14 +3923,14 @@ Public Class SourceQcFile52
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMinLeft).ToString("0.######", TheApp.InternalNumberFormat)
 					'line += " "
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMaxLeft).ToString("0.######", TheApp.InternalNumberFormat)
-					line += aBone.theJiggleBone.baseMinLeft.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMinLeft.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += aBone.theJiggleBone.baseMaxLeft.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMaxLeft.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "left_friction "
-					line += aBone.theJiggleBone.baseLeftFriction.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseLeftFriction.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					line = vbTab
@@ -3939,14 +3939,14 @@ Public Class SourceQcFile52
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMinUp).ToString("0.######", TheApp.InternalNumberFormat)
 					'line += " "
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMaxUp).ToString("0.######", TheApp.InternalNumberFormat)
-					line += aBone.theJiggleBone.baseMinUp.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMinUp.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += aBone.theJiggleBone.baseMaxUp.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMaxUp.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "up_friction "
-					line += aBone.theJiggleBone.baseUpFriction.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseUpFriction.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					line = vbTab
@@ -3955,14 +3955,14 @@ Public Class SourceQcFile52
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMinForward).ToString("0.######", TheApp.InternalNumberFormat)
 					'line += " "
 					'line += MathModule.RadiansToDegrees(aBone.theJiggleBone.baseMaxForward).ToString("0.######", TheApp.InternalNumberFormat)
-					line += aBone.theJiggleBone.baseMinForward.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMinForward.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += aBone.theJiggleBone.baseMaxForward.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseMaxForward.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 					line = vbTab
 					line += vbTab
 					line += "forward_friction "
-					line += aBone.theJiggleBone.baseForwardFriction.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aBone.theJiggleBone.baseForwardFriction.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 
 					line = vbTab
@@ -4015,19 +4015,19 @@ Public Class SourceQcFile52
 			line = vbTab
 			line += vbTab
 			line += "pitch_constraint "
-			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.minPitch).ToString("0.######", TheApp.InternalNumberFormat)
+			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.minPitch).ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.maxPitch).ToString("0.######", TheApp.InternalNumberFormat)
+			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.maxPitch).ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 			line = vbTab
 			line += vbTab
 			line += "pitch_friction "
-			line += aBone.theJiggleBone.pitchFriction.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aBone.theJiggleBone.pitchFriction.ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 			line = vbTab
 			line += vbTab
 			line += "pitch_bounce "
-			line += aBone.theJiggleBone.pitchBounce.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aBone.theJiggleBone.pitchBounce.ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 
@@ -4035,19 +4035,19 @@ Public Class SourceQcFile52
 			line = vbTab
 			line += vbTab
 			line += "yaw_constraint "
-			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.minYaw).ToString("0.######", TheApp.InternalNumberFormat)
+			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.minYaw).ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.maxYaw).ToString("0.######", TheApp.InternalNumberFormat)
+			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.maxYaw).ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 			line = vbTab
 			line += vbTab
 			line += "yaw_friction "
-			line += aBone.theJiggleBone.yawFriction.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aBone.theJiggleBone.yawFriction.ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 			line = vbTab
 			line += vbTab
 			line += "yaw_bounce "
-			line += aBone.theJiggleBone.yawBounce.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aBone.theJiggleBone.yawBounce.ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 
@@ -4055,7 +4055,7 @@ Public Class SourceQcFile52
 			line = vbTab
 			line += vbTab
 			line += "angle_constraint "
-			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.angleLimit).ToString("0.######", TheApp.InternalNumberFormat)
+			line += MathModule.RadiansToDegrees(aBone.theJiggleBone.angleLimit).ToString("0.######", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 	End Sub
@@ -4086,7 +4086,7 @@ Public Class SourceQcFile52
 		line = ""
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+		If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 			line = "// Clipping box or view bounding box."
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
@@ -4099,22 +4099,22 @@ Public Class SourceQcFile52
 		maxX = Math.Round(Me.theMdlFileData.viewBoundingBoxMaxPositionX, 3)
 		maxY = Math.Round(Me.theMdlFileData.viewBoundingBoxMaxPositionY, 3)
 		maxZ = Math.Round(Me.theMdlFileData.viewBoundingBoxMaxPositionZ, 3)
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line = "$CBox "
 		Else
 			line = "$cbox "
 		End If
-		line += minX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += minY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += minZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minZ.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxZ.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -4130,7 +4130,7 @@ Public Class SourceQcFile52
 		line = ""
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+		If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 			line = "// Bounding box or hull. Used for collision with a world object."
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
@@ -4145,22 +4145,22 @@ Public Class SourceQcFile52
 		maxY = Math.Round(Me.theMdlFileData.hullMaxPositionY, 3)
 		maxZ = Math.Round(Me.theMdlFileData.hullMaxPositionZ, 3)
 		line = ""
-		If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 			line += "$BBox "
 		Else
 			line += "$bbox "
 		End If
-		line += minX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += minY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += minZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minZ.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxX.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxY.ToString("0.######", Settings.InternalNumberFormat)
 		line += " "
-		line += maxZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxZ.ToString("0.######", Settings.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -4175,13 +4175,13 @@ Public Class SourceQcFile52
 		End If
 
 		hitBoxWasAutoGenerated = (Me.theMdlFileData.flags And SourceMdlFileData.STUDIOHDR_FLAGS_AUTOGENERATED_HITBOX) > 0
-		If hitBoxWasAutoGenerated AndAlso Not TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+		If hitBoxWasAutoGenerated AndAlso Not Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 			Exit Sub
 		End If
 
 		Me.theOutputFileStreamWriter.WriteLine()
 
-		If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+		If Settings.DecompilerSettings.DecompileDebugInfoFilesIsChecked Then
 			line = "// Hitbox info. Used for damage-based collision."
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
@@ -4218,7 +4218,7 @@ Public Class SourceQcFile52
 		For i As Integer = 0 To Me.theMdlFileData.theHitboxSets.Count - 1
 			aHitboxSet = Me.theMdlFileData.theHitboxSets(i)
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$HBoxSet "
 			Else
 				line = "$hboxset "
@@ -4236,7 +4236,7 @@ Public Class SourceQcFile52
 		Next
 
 		If skipBoneInBBoxCommandWasUsed Then
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$SkipBoneInBBox"
 			Else
 				line = "$skipboneinbbox"
@@ -4251,28 +4251,28 @@ Public Class SourceQcFile52
 
 		For j As Integer = 0 To theHitboxes.Count - 1
 			aHitbox = theHitboxes(j)
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line = "$HBox "
 			Else
 				line = "$hbox "
 			End If
-			line += aHitbox.groupIndex.ToString(TheApp.InternalNumberFormat)
+			line += aHitbox.groupIndex.ToString(Settings.InternalNumberFormat)
 			line += " "
 			line += """"
 			line += Me.theMdlFileData.theBones(aHitbox.boneIndex).theName
 			line += """"
 			line += " "
-			line += aHitbox.boundingBoxMin.x.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.x.ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMin.y.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.y.ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMin.z.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.z.ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.x.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.x.ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.y.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.y.ToString("0.######", Settings.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.z.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.z.ToString("0.######", Settings.InternalNumberFormat)
 			'NOTE: For L4D2 survivor_teenangst, the extra zeroes cause this compile error: 
 			'ERROR: c:\users\zeqmacaw\documents\- unpacked source\left 4 dead 2\left4dead2_dlc3\models\survivors\decompiled 0.26\survivor_teenangst\survivor_teenangst_boxes.qci(10): - bad command 0
 			'ERROR: Aborted Processing on 'survivors/survivor_TeenAngst.mdl'
@@ -4281,11 +4281,11 @@ Public Class SourceQcFile52
 			If Me.theMdlFileData.version >= 49 AndAlso hitboxSetName = "cstrike" Then
 				'NOTE: Roll (z) is first.
 				line += " "
-				line += aHitbox.boundingBoxPitchYawRoll.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aHitbox.boundingBoxPitchYawRoll.z.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aHitbox.boundingBoxPitchYawRoll.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aHitbox.boundingBoxPitchYawRoll.x.ToString("0.######", Settings.InternalNumberFormat)
 				line += " "
-				line += aHitbox.boundingBoxPitchYawRoll.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aHitbox.boundingBoxPitchYawRoll.y.ToString("0.######", Settings.InternalNumberFormat)
 			End If
 			line += " "
 			line += """"
@@ -4345,7 +4345,7 @@ Public Class SourceQcFile52
 				aBodyPart = Me.theMdlFileData.theBodyParts(bodyPartIndex)
 				aVtxBodyPart = Me.theVtxFileData.theVtxBodyParts(bodyPartIndex)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$BodyGroup "
 				Else
 					line = "$bodygroup "
@@ -4399,20 +4399,20 @@ Public Class SourceQcFile52
 				For i As Integer = 0 To Me.theMdlFileData.theBoneControllers.Count - 1
 					boneController = Me.theMdlFileData.theBoneControllers(i)
 
-					If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+					If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 						line = "$Controller "
 					Else
 						line = "$controller "
 					End If
-					line += boneController.inputField.ToString(TheApp.InternalNumberFormat)
+					line += boneController.inputField.ToString(Settings.InternalNumberFormat)
 					line += " """
 					line += Me.theMdlFileData.theBones(boneController.boneIndex).theName
 					line += """ "
 					line += boneController.TypeName
 					line += " "
-					line += boneController.startBlah.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.startBlah.ToString("0.######", Settings.InternalNumberFormat)
 					line += " "
-					line += boneController.endBlah.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.endBlah.ToString("0.######", Settings.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -4440,7 +4440,7 @@ Public Class SourceQcFile52
 							emptyLineIsAlreadyWritten = True
 						End If
 
-						If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+						If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 							line = "$ScreenAlign "
 						Else
 							line = "$screenalign "
@@ -4454,7 +4454,7 @@ Public Class SourceQcFile52
 							emptyLineIsAlreadyWritten = True
 						End If
 
-						If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+						If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 							line = "$ScreenAlign "
 						Else
 							line = "$screenalign "
@@ -4670,7 +4670,7 @@ Public Class SourceQcFile52
 				Dim aSequenceDesc As SourceMdlSequenceDesc
 				aSequenceDesc = Me.theMdlFileData.theSequenceDescs(i)
 
-				If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+				If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 					line = "$DeclareSequence"
 				Else
 					line = "$declaresequence"

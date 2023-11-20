@@ -37,11 +37,11 @@ Public Class SourceSmdFile06
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -59,7 +59,7 @@ Public Class SourceSmdFile06
 		line = "skeleton"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0"
 		Else
 			line = "  time 0"
@@ -88,19 +88,19 @@ Public Class SourceSmdFile06
 			End If
 
 			line = "    "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " "
-			line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -122,7 +122,7 @@ Public Class SourceSmdFile06
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		For frameIndex As Integer = 0 To aSequenceDesc.frameCount - 1
-			If TheApp.Settings.DecompileStricterFormatIsChecked Then
+			If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 				line = "time "
 			Else
 				line = "  time "
@@ -171,21 +171,21 @@ Public Class SourceSmdFile06
 				End If
 
 				line = "    "
-				line += boneIndex.ToString(TheApp.InternalNumberFormat)
+				line += boneIndex.ToString(Settings.InternalNumberFormat)
 
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 				line += " "
-				line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 				'If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
 				'	line += "   # "
@@ -345,27 +345,27 @@ Public Class SourceSmdFile06
 			texCoordY = 1 - aStripGroup.t / aTexture.height
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 
 			line += " "
-			line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 
 			line += " "
-			line += texCoordX.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += texCoordX.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
 			'NOTE: Unlike all other versions, MDL v06 does not use (1 - texCoordY).
-			line += texCoordY.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += texCoordY.ToString("0.000000", Settings.InternalNumberFormat)
 		Catch ex As Exception
 			line = "// " + line
 		End Try

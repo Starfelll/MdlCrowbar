@@ -38,11 +38,11 @@ Public Class SourceVtaFile37
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -57,7 +57,7 @@ Public Class SourceVtaFile37
 		line = "skeleton"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0 # basis shape key"
 		Else
 			line = "  time 0 # basis shape key"
@@ -73,12 +73,12 @@ Public Class SourceVtaFile37
 		For flexTimeIndex = 1 To Me.theBodyPart.theFlexFrames.Count - 1
 			aFlexFrame = Me.theBodyPart.theFlexFrames(flexTimeIndex)
 
-			If TheApp.Settings.DecompileStricterFormatIsChecked Then
+			If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 				line = "time "
 			Else
 				line = "  time "
 			End If
-			line += timeIndex.ToString(TheApp.InternalNumberFormat)
+			line += timeIndex.ToString(Settings.InternalNumberFormat)
 			line += " # "
 			line += aFlexFrame.flexDescription
 			Me.theOutputFileStreamWriter.WriteLine(line)
@@ -98,7 +98,7 @@ Public Class SourceVtaFile37
 		line = "vertexanimation"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0 # basis shape key"
 		Else
 			line = "  time 0 # basis shape key"
@@ -135,19 +135,19 @@ Public Class SourceVtaFile37
 				aVertex = Me.theMdlFileData.theVertexes(vertexIndex)
 
 				line = "    "
-				line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+				line += vertexIndex.ToString(Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.position.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.position.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.position.z.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += aVertex.normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += aVertex.normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		Catch ex As Exception
@@ -163,12 +163,12 @@ Public Class SourceVtaFile37
 		For flexTimeIndex = 1 To Me.theBodyPart.theFlexFrames.Count - 1
 			aFlexFrame = Me.theBodyPart.theFlexFrames(flexTimeIndex)
 
-			If TheApp.Settings.DecompileStricterFormatIsChecked Then
+			If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 				line = "time "
 			Else
 				line = "  time "
 			End If
-			line += timeIndex.ToString(TheApp.InternalNumberFormat)
+			line += timeIndex.ToString(Settings.InternalNumberFormat)
 			line += " # "
 			line += aFlexFrame.flexDescription
 			Me.theOutputFileStreamWriter.WriteLine(line)
@@ -217,19 +217,19 @@ Public Class SourceVtaFile37
 			normalY = aVertex.normal.y + aVertAnim.nDelta.y
 			normalZ = aVertex.normal.z + aVertAnim.nDelta.z
 			line = "    "
-			line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+			line += vertexIndex.ToString(Settings.InternalNumberFormat)
 			line += " "
-			line += positionX.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += positionX.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += positionY.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += positionY.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += positionZ.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += positionZ.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normalX.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normalX.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normalY.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normalY.ToString("0.000000", Settings.InternalNumberFormat)
 			line += " "
-			line += normalZ.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normalZ.ToString("0.000000", Settings.InternalNumberFormat)
 
 			' For debugging.
 			'line += " // "

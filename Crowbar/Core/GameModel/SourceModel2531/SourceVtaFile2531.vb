@@ -37,11 +37,11 @@ Public Class SourceVtaFile2531
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(Settings.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(Settings.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -56,7 +56,7 @@ Public Class SourceVtaFile2531
 		line = "skeleton"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0 # basis shape key"
 		Else
 			line = "  time 0 # basis shape key"
@@ -72,12 +72,12 @@ Public Class SourceVtaFile2531
 		For flexTimeIndex = 1 To Me.theMdlFileData.theFlexFrames.Count - 1
 			aFlexFrame = Me.theMdlFileData.theFlexFrames(flexTimeIndex)
 
-			If TheApp.Settings.DecompileStricterFormatIsChecked Then
+			If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 				line = "time "
 			Else
 				line = "  time "
 			End If
-			line += timeIndex.ToString(TheApp.InternalNumberFormat)
+			line += timeIndex.ToString(Settings.InternalNumberFormat)
 			line += " # "
 			line += aFlexFrame.flexDescription
 			Me.theOutputFileStreamWriter.WriteLine(line)
@@ -95,7 +95,7 @@ Public Class SourceVtaFile2531
 		line = "vertexanimation"
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		If TheApp.Settings.DecompileStricterFormatIsChecked Then
+		If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 			line = "time 0 # basis shape key"
 		Else
 			line = "  time 0 # basis shape key"
@@ -145,19 +145,19 @@ Public Class SourceVtaFile2531
 				End If
 
 				line = "    "
-				line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+				line += vertexIndex.ToString(Settings.InternalNumberFormat)
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		Catch ex As Exception
@@ -174,12 +174,12 @@ Public Class SourceVtaFile2531
 			For flexTimeIndex = 1 To Me.theMdlFileData.theFlexFrames.Count - 1
 				aFlexFrame = Me.theMdlFileData.theFlexFrames(flexTimeIndex)
 
-				If TheApp.Settings.DecompileStricterFormatIsChecked Then
+				If Settings.DecompilerSettings.DecompileStricterFormatIsChecked Then
 					line = "time "
 				Else
 					line = "  time "
 				End If
-				line += timeIndex.ToString(TheApp.InternalNumberFormat)
+				line += timeIndex.ToString(Settings.InternalNumberFormat)
 				line += " # "
 				line += aFlexFrame.flexDescription
 				Me.theOutputFileStreamWriter.WriteLine(line)
@@ -396,19 +396,19 @@ Public Class SourceVtaFile2531
 				'normal.z = 1
 
 				line = "    "
-				line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+				line += vertexIndex.ToString(Settings.InternalNumberFormat)
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.x.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.y.ToString("0.000000", Settings.InternalNumberFormat)
 				line += " "
-				line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.z.ToString("0.000000", Settings.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		Catch ex As Exception

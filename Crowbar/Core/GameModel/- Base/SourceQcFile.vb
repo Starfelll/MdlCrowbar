@@ -55,7 +55,7 @@ Public Class SourceQcFile
 		Using outputFileStream As StreamWriter = File.AppendText(qcPathFileName)
 			outputFileStream.WriteLine()
 
-			If TheApp.Settings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
+			If Settings.DecompilerSettings.DecompileQcUseMixedCaseForKeywordsIsChecked Then
 				line += "$Include"
 			Else
 				line += "$include"
@@ -223,7 +223,7 @@ Public Class SourceQcFile
 		Dim aTextureFileName As String
 		Dim line As String = ""
 
-		If TheApp.Settings.DecompileQcSkinFamilyOnSingleLineIsChecked Then
+		If Settings.DecompilerSettings.DecompileQcSkinFamilyOnSingleLineIsChecked Then
 			Dim textureFileNameMaxLengths As New List(Of Integer)()
 			Dim length As Integer
 

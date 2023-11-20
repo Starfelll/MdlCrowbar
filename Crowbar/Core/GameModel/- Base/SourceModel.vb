@@ -303,8 +303,8 @@ Public MustInherit Class SourceModel
 
 #Region "Methods"
 
-	Public Overridable Function ReadMdlFileHeader() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadMdlFileHeader() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		If Not File.Exists(Me.theMdlPathFileName) Then
 			status = StatusMessage.ErrorRequiredMdlFileNotFound
@@ -318,47 +318,47 @@ Public MustInherit Class SourceModel
 	End Function
 
 	Public Overridable Function CheckForRequiredFiles() As FilesFoundFlags
-		Dim status As AppEnums.FilesFoundFlags
+		Dim status As Enums.FilesFoundFlags
 
 		status = FilesFoundFlags.AllFilesFound
 
 		Return status
 	End Function
 
-	Public Overridable Function ReadAniFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadAniFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
 		Return status
 	End Function
 
-	Public Overridable Function ReadSequenceGroupMdlFiles() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadSequenceGroupMdlFiles() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
 		Return status
 	End Function
 
-	Public Overridable Function ReadTextureMdlFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadTextureMdlFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
 		Return status
 	End Function
 
-	Public Overridable Function ReadPhyFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadPhyFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
 		Return status
 	End Function
 
-	Public Overridable Function ReadMdlFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadMdlFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Try
 			Me.ReadFile(Me.theMdlPathFileName, AddressOf Me.ReadMdlFile_Internal)
@@ -369,8 +369,8 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function ReadVtxFileHeader() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadVtxFileHeader() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		If status = StatusMessage.Success Then
 			Me.ReadFile(Me.theVtxPathFileName, AddressOf Me.ReadVtxFileHeader_Internal)
@@ -379,8 +379,8 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function ReadVtxFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadVtxFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'If String.IsNullOrEmpty(Me.theVtxPathFileName) Then
 		'	status = Me.CheckForRequiredFiles()
@@ -393,8 +393,8 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function ReadVvdFile() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function ReadVvdFile() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		'If String.IsNullOrEmpty(Me.theVvdPathFileName) Then
 		'	status = Me.CheckForRequiredFiles()
@@ -421,14 +421,14 @@ Public MustInherit Class SourceModel
 	'	Return status
 	'End Function
 
-	Public Overridable Function SetAllSmdPathFileNames() As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function SetAllSmdPathFileNames() As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteQcFile(ByVal qcPathFileName As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteQcFile(ByVal qcPathFileName As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 		Dim writeStatus As String
 
 		Me.theQcPathFileName = qcPathFileName
@@ -443,14 +443,14 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteReferenceMeshFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteLodMeshFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteLodMeshFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
@@ -480,20 +480,20 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function WritePhysicsMeshSmdFile(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WritePhysicsMeshSmdFile(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteVertexAnimationVtaFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteVertexAnimationVtaFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
@@ -542,22 +542,22 @@ Public MustInherit Class SourceModel
 		Return status
 	End Function
 
-	Public Overridable Function WriteVrdFile(ByVal vrdPathFileName As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteVrdFile(ByVal vrdPathFileName As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteTextureFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteTextureFiles(ByVal modelOutputPath As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
 		Return status
 	End Function
 
-	Public Overridable Function WriteDeclareSequenceQciFile(ByVal declareSequenceQciPathFileName As String) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Public Overridable Function WriteDeclareSequenceQciFile(ByVal declareSequenceQciPathFileName As String) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Return status
 	End Function
@@ -583,8 +583,8 @@ Public MustInherit Class SourceModel
 			Optional ByVal debugTextureMDLFileNameSuffix As String = "decompile-TextureMDL.txt",
 			Optional ByVal debugVtxFileNameSuffix As String = "decompile-VTX.txt",
 			Optional ByVal debugVvdFileNameSuffix As String = "decompile-VVD.txt"
-			) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+			) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		status = StatusMessage.Error
 
@@ -666,8 +666,8 @@ Public MustInherit Class SourceModel
 
 	End Sub
 
-	Protected Overridable Function ReadSequenceGroupMdlFile(ByVal pathFileName As String, ByVal sequenceGroupIndex As Integer) As AppEnums.StatusMessage
-		Dim status As AppEnums.StatusMessage = StatusMessage.Success
+	Protected Overridable Function ReadSequenceGroupMdlFile(ByVal pathFileName As String, ByVal sequenceGroupIndex As Integer) As Enums.StatusMessage
+		Dim status As Enums.StatusMessage = StatusMessage.Success
 
 		Dim inputFileStream As FileStream = Nothing
 		Me.theInputFileReader = Nothing
